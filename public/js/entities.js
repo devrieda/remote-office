@@ -1,4 +1,3 @@
-import { loadMario } from './entities/Mario.js';
 import { loadPanda } from './entities/Panda.js';
 
 export function loadEntities(audioContext) {
@@ -9,7 +8,6 @@ export function loadEntities(audioContext) {
   }
 
   return Promise.all([
-    loadMario(audioContext).then(addAs('mario')),
     loadPanda(audioContext).then(addAs('panda')),
   ])
   .then(() => entityFactories);

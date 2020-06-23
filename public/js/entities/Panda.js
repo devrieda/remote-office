@@ -15,27 +15,23 @@ export function loadPanda() {
 }
 
 function createPandaFactory(sprite) {
-  const runAnim = sprite.animations.get('run');
+  const runRight = sprite.animations.get('run-right');
+  const runLeft  = sprite.animations.get('run-left');
+  const runUp    = sprite.animations.get('run-up');
+  const runDown  = sprite.animations.get('run-down');
 
   function routeFrame(panda) {
-    if (panda.traits.get(Jump).falling) {
-      return 'jump';
-    }
     if (panda.traits.get(Go).distance > 0) {
-      if ((panda.vel.x > 0 && panda.traits.get(Go).dir < 0) ||
-          (panda.vel.x < 0 && panda.traits.get(Go).dir > 0)) {
-        return 'break';
-      }
-      return runAnim(panda.traits.get(Go).distance);
+      return runRight(panda.traits.get(Go).distance);
     }
     return 'idle'
   }
 
-  function drawMario(context) {
+  function drawPanda(context) {
     sprite.draw(routeFrame(this), context, 0, 0, this.traits.get(Go).heading < 0);
   }
 
-  return function createMario() {
+  return function createPanda() {
     const panda = new Entity();
 
     panda.size.set(16, 16);

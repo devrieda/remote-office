@@ -27,11 +27,11 @@ async function main(canvas) {
   const loadLevel = await createLevelLoader(entityFactory);
 
   const sceneRunner = new SceneRunner();
-  const mario = entityFactory.mario();
-  makePlayer(mario, "MARIO");
+  const panda = entityFactory.panda();
+  makePlayer(panda, "PANDA");
 
   const inputRouter = setupKeyboard(window);
-  inputRouter.addReceiver(mario);
+  inputRouter.addReceiver(panda);
 
   async function runLevel(name) {
     const level = await loadLevel(name);
@@ -54,10 +54,10 @@ async function main(canvas) {
     const playerProgressLayer = createPlayerProgressLayer(font, level); 
     const dashboardLayer = createDashboardLayer(font, level);
 
-    mario.pos.set(0, 0);
-    level.entities.add(mario);
+    panda.pos.set(0, 0);
+    level.entities.add(panda);
 
-    const playerEnv = createPlayerEnv(mario);
+    const playerEnv = createPlayerEnv(panda);
     level.entities.add(playerEnv);
 
     const waitScreen = new TimedScene();
@@ -89,7 +89,7 @@ async function main(canvas) {
 
   timer.start();
 
-  runLevel('5');
+  runLevel('5th');
 };
 
 const canvas = document.getElementById('screen');
