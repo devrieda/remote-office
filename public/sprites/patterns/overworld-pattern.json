@@ -1,0 +1,30 @@
+{
+  "cloud-single": {
+    "tiles": [
+      {
+        "name": "cloud-1-1",
+        "ranges": [[0, 0]]
+      },
+      {
+        "name": "cloud-1-2",
+        "ranges": [[1, 0]]
+      },
+      {
+        "name": "cloud-1-3",
+        "ranges": [[2, 0]]
+      },
+      {
+        "name": "cloud-2-1",
+        "ranges": [[0, 1]]
+      },
+      {
+        "name": "cloud-2-2",
+        "ranges": [[1, 1]]
+      },
+      {
+        "name": "cloud-2-3",
+        "ranges": [[2, 1]]
+      }
+    ]
+  }
+}
