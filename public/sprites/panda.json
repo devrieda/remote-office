@@ -3,7 +3,7 @@
   "frames": [
     {
       "name": "idle",
-      "rect": [16, 48, 16, 16]
+      "rect": [16, 0, 16, 16]
     },
     {
       "name": "run-down-1",

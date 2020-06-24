@@ -1,42 +1,47 @@
 import Trait from '../Trait.js';
 
+export const Headings = {
+  UP:    Symbol('up'),
+  LEFT:  Symbol('left'),
+  DOWN:  Symbol('down'),
+  RIGHT: Symbol('right')
+}
+
 export default class Go extends Trait {
   constructor() {
     super();
-    this.dir = 0;
-    this.acceleration = 400;
-    this.deceleration = 300;
-    this.dragFactor = 1/5000;
+    this.speed = 5000;
 
-    this.distance = 0;
-    this.heading = 1;
+    this.dirX = 0;
+    this.dirY = 0;
+
+    this.distanceX = 0;
+    this.distanceY = 0;
+
+    this.heading = Headings.DOWN;
   }
 
   update(entity, { deltaTime }) {
-    const absX = Math.abs(entity.vel.x);
-
-    if (this.dir !== 0) {
-      entity.vel.x += this.acceleration * deltaTime * this.dir;
-
-      if (entity.jump) {
-        if (entity.jump.falling === false) {
-          this.heading = this.dir;
-        }
-      } else {
-        this.heading = this.dir;
-      }
-
-    } else if (entity.vel.x !== 0) {
-      const decel = Math.min(absX, this.deceleration * deltaTime);
-      entity.vel.x += entity.vel.x > 0 ? -decel : decel;
+    // move left/right
+    if (this.dirX !== 0) {
+      this.distanceX += Math.abs(entity.vel.x) * deltaTime;
+      entity.vel.x = this.speed * deltaTime * this.dirX;
+      this.heading = this.dirX > 0 ? Headings.RIGHT : Headings.LEFT;
 
     } else {
-      this.distance = 0;
+      this.distanceX = 0;
+      entity.vel.x = 0;
     }
 
-    const drag = this.dragFactor * entity.vel.x * absX;
-    entity.vel.x -= drag;
+    // move up/down
+    if (this.dirY !== 0) {
+      this.distanceY += Math.abs(entity.vel.y) * deltaTime;
+      entity.vel.y = this.speed * deltaTime * this.dirY;
+      this.heading = this.dirY > 0 ? Headings.DOWN : Headings.UP;
 
-    this.distance += absX * deltaTime;
+    } else {
+      this.distanceY = 0;
+      entity.vel.y = 0;
+    }
   }
 }

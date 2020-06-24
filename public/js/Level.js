@@ -8,6 +8,7 @@ import { findPlayers } from './player.js';
 function focusPlayer(level) {
   for (const player of findPlayers(level.entities)) {
     level.camera.pos.x = Math.max(0, player.pos.x - 100);
+    level.camera.pos.y = Math.max(0, player.pos.y - 100);
   }
 }
 
@@ -17,14 +18,9 @@ export default class Level extends Scene {
   constructor() {
     super();
     this.name = "";
-
-    this.gravity = 1500;
     this.totalTime = 0;
-
     this.camera = new Camera();
-
     this.music = new MusicController();
-
     this.entities = new Set();
 
     this.entityCollider = new EntityCollider(this.entities);

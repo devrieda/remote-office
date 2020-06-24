@@ -54,7 +54,7 @@ async function main(canvas) {
     const playerProgressLayer = createPlayerProgressLayer(font, level); 
     const dashboardLayer = createDashboardLayer(font, level);
 
-    panda.pos.set(0, 0);
+    panda.pos.set(96, 120);
     level.entities.add(panda);
 
     const playerEnv = createPlayerEnv(panda);

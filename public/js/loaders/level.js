@@ -1,6 +1,5 @@
 import { Matrix } from '../math.js';
 import Entity from '../Entity.js';
-import LevelTimer from '../traits/LevelTimer.js';
 import Trigger from '../traits/Trigger.js';
 import Level from '../Level.js';
 import { createBackgroundLayer  } from '../layers/background.js';
@@ -9,26 +8,11 @@ import { loadMusicSheet } from './music.js';
 import { loadSpriteSheet } from './sprite.js';
 import { loadJSON } from '../loaders.js';
 
-function createTimer() {
-  const timer = new Entity();
-  timer.addTrait(new LevelTimer());
-  return timer;
-}
-
 function loadPattern(name) {
   return loadJSON(`/sprites/patterns/${name}.json`);
 }
 
 function setupBehavior(level) {
-  const timer = createTimer();
-  level.entities.add(timer);
-
-  level.events.listen(LevelTimer.EVENT_TIMER_OK, () => {
-    level.music.playTheme();
-  });
-  level.events.listen(LevelTimer.EVENT_TIMER_HURRY, () => {
-    level.music.playHurryTheme();
-  });
 }
 
 function setupBackgrounds(levelSpec, level, backgroundSprites, patterns) {

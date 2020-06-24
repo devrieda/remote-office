@@ -1,7 +1,6 @@
 import Keyboard from './KeyboardState.js';
 import InputRouter from './InputRouter.js';
-import Jump from './traits/Jump.js';
-import Go from './traits/Go.js';
+import Go, { Headings } from './traits/Go.js';
 
 export function setupKeyboard(window) {
   const input = new Keyboard();
@@ -9,24 +8,34 @@ export function setupKeyboard(window) {
 
   input.listenTo(window);
 
-  input.addMapping('KeyK', keyState => {
-    if (keyState) {
-      router.route(entity => entity.traits.get(Jump).start());
-    } else {
-      router.route(entity => entity.traits.get(Jump).cancel());
-    }
+  // B button
+  input.addMapping('KeyH', keyState => {
+    console.log('press B', keyState);
   });
 
+  // A button
   input.addMapping('KeyJ', keyState => {
-    router.route(entity => entity.turbo(keyState));
+    console.log('press A', keyState);
   });
 
-  input.addMapping('KeyD', keyState => {
-    router.route(entity => entity.traits.get(Go).dir += keyState ? 1 : -1);
+  // D-pad UP
+  input.addMapping('KeyW', keyState => {
+    router.route(entity => entity.traits.get(Go).dirY += keyState ? -1 : 1);
   });
 
+  // D-pad LEFT
   input.addMapping('KeyA', keyState => {
-    router.route(entity => entity.traits.get(Go).dir += keyState ? -1 : 1);
+    router.route(entity => entity.traits.get(Go).dirX += keyState ? -1 : 1);
+  });
+
+  // D-pad DOWN
+  input.addMapping('KeyS', keyState => {
+    router.route(entity => entity.traits.get(Go).dirY += keyState ? 1 : -1);
+  });
+
+  // D-pad RIGHT
+  input.addMapping('KeyD', keyState => {
+    router.route(entity => entity.traits.get(Go).dirX += keyState ? 1 : -1);
   });
 
   return router;

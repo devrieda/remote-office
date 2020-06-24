@@ -13,7 +13,5 @@ export default class Physics extends Trait {
 
     entity.pos.y += entity.vel.y * deltaTime;
     level.tileCollider.checkY(entity, gameContext, level);
-
-    entity.vel.y += level.gravity * deltaTime;
   }
 }

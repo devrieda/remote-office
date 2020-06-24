@@ -3,6 +3,7 @@ import Go from '../traits/Go.js';
 import Killable from '../traits/Killable.js';
 import Solid from '../traits/Solid.js';
 import Physics from '../traits/Physics.js';
+import { Headings } from '../traits/Go.js';
 import { loadSpriteSheet } from '../loaders/sprite.js';
 
 export function loadPanda() {
@@ -21,14 +22,39 @@ function createPandaFactory(sprite) {
   const runDown  = sprite.animations.get('run-down');
 
   function routeFrame(panda) {
-    if (panda.traits.get(Go).distance > 0) {
-      return runRight(panda.traits.get(Go).distance);
+    const go = panda.traits.get(Go);
+
+    // running
+    if (go.dirX > 0) {
+      return runRight(go.distanceX);
+
+    } else if (go.dirX < 0) {
+      return runLeft(go.distanceX);
+
+    } else if (go.dirY > 0) {
+      return runDown(go.distanceY);
+
+    } else if (go.dirY < 0) {
+      return runUp(go.distanceY);
     }
-    return 'idle'
+
+    // not running, but make sure they're facing the right way!
+    if (go.heading === Headings.RIGHT) {
+      return 'run-right-2';
+    } else if (go.heading === Headings.LEFT) {
+      return 'run-left-2';
+    } else if (go.heading === Headings.DOWN) {
+      return 'run-down-2';
+    } else if (go.heading === Headings.UP) {
+      return 'run-up-2';
+    }
+
+    // default
+    return 'idle';
   }
 
   function drawPanda(context) {
-    sprite.draw(routeFrame(this), context, 0, 0, this.traits.get(Go).heading < 0);
+    sprite.draw(routeFrame(this), context, 0, 0);
   }
 
   return function createPanda() {
