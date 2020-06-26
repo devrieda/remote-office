@@ -42,7 +42,7 @@ async function main(canvas) {
   async function runLevel(name) {
     const floor = await loadFloor(name);
 
-    panda.pos.set(220, 220);
+    panda.pos.set(576, 412);
     floor.entities.add(panda);
 
     const dashboardLayer = createDashboardLayer(font, floor);

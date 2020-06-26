@@ -19,7 +19,7 @@ export function createDashboardLayer(font, level) {
     const playerTrait = getPlayerTrait(level);
 
     font.print(playerTrait.name, context, 10, LINE1);
-    font.print(playerTrait.score.toString().padStart(6, '0'), context, 10, LINE2);
+    // font.print(playerTrait.score.toString().padStart(6, '0'), context, 10, LINE2);
 
     // font.print('@x' + playerTrait.coins.toString().padStart(2, '0'), context, 96, LINE2);
 

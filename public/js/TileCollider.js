@@ -1,9 +1,17 @@
 import TileResolver from './TileResolver.js';
+import { blueMoon } from './tiles/blue-moon.js';
+import { coffee } from './tiles/coffee.js';
+import { laCroix } from './tiles/la-croix.js';
 import { mv } from './tiles/mv.js';
+import { nerf } from './tiles/nerf.js';
 import { wall } from './tiles/wall.js';
 
 const handlers = {
+  blueMoon,
+  coffee,
+  laCroix,
   mv,
+  nerf,
   wall
 }
 

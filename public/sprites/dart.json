@@ -1,0 +1,72 @@
+{
+  "imageURL": "/img/characters.png",
+  "frames": [
+    {
+      "name": "dart-down-1",
+      "rect": [48, 64, 16, 16]
+    },
+    {
+      "name": "dart-down-2",
+      "rect": [48, 80, 16, 16]
+    },
+    {
+      "name": "dart-up-1",
+      "rect": [32, 64, 16, 16]
+    },
+    {
+      "name": "dart-up-2",
+      "rect": [32, 80, 16, 16]
+    },
+    {
+      "name": "dart-left-1",
+      "rect": [16, 64, 16, 16]
+    },
+    {
+      "name": "dart-left-2",
+      "rect": [16, 80, 16, 16]
+    },
+    {
+      "name": "dart-right-1",
+      "rect": [0, 64, 16, 16]
+    },
+    {
+      "name": "dart-right-1",
+      "rect": [0, 80, 16, 16]
+    }
+  ],
+
+  "animations": [
+    {
+      "name": "dart-down",
+      "frameLen": 6,
+      "frames": [
+        "dart-down-1",
+        "dart-down-2"
+      ]
+    },
+    {
+      "name": "dart-up",
+      "frameLen": 6,
+      "frames": [
+        "dart-up-1",
+        "dart-up-2"
+      ]
+    },
+    {
+      "name": "dart-left",
+      "frameLen": 6,
+      "frames": [
+        "dart-left-1",
+        "dart-left-2"
+      ]
+    },
+    {
+      "name": "dart-right",
+      "frameLen": 6,
+      "frames": [
+        "dart-right-1",
+        "dart-right-2"
+      ]
+    }
+  ]
+}

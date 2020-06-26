@@ -5,21 +5,26 @@ import Solid from '../traits/Solid.js';
 import Physics from '../traits/Physics.js';
 import { Headings } from '../traits/Go.js';
 import { loadSpriteSheet } from '../loaders/sprite.js';
+import { loadAudioBoard } from '../loaders/audio.js';
 
-export function loadPanda() {
+export function loadPanda(audioContext) {
   return Promise.all([
-    loadSpriteSheet('panda')
+    loadSpriteSheet('panda'),
+    loadAudioBoard('panda', audioContext)
   ])
-  .then(([sprite]) => {
-    return createPandaFactory(sprite);
+  .then(([sprite, audio]) => {
+    return createPandaFactory(sprite, audio);
   });
 }
 
-function createPandaFactory(sprite) {
-  const runRight = sprite.animations.get('run-right');
-  const runLeft  = sprite.animations.get('run-left');
-  const runUp    = sprite.animations.get('run-up');
-  const runDown  = sprite.animations.get('run-down');
+function createPandaFactory(sprite, audio) {
+  const nerf = true;
+  const modifier = nerf ? '-nerf' : '';
+
+  const runRight = sprite.animations.get(`run-right${modifier}`);
+  const runLeft  = sprite.animations.get(`run-left${modifier}`);
+  const runUp    = sprite.animations.get(`run-up${modifier}`);
+  const runDown  = sprite.animations.get(`run-down${modifier}`);
 
   function routeFrame(panda) {
     const go = panda.traits.get(Go);
@@ -40,13 +45,13 @@ function createPandaFactory(sprite) {
 
     // not running, but make sure they're facing the right way!
     if (go.heading === Headings.RIGHT) {
-      return 'run-right-2';
+      return `run-right${modifier}-2`;
     } else if (go.heading === Headings.LEFT) {
-      return 'run-left-2';
+      return `run-left${modifier}-2`;
     } else if (go.heading === Headings.DOWN) {
-      return 'run-down-2';
+      return `run-down${modifier}-2`;
     } else if (go.heading === Headings.UP) {
-      return 'run-up-2';
+      return `run-up${modifier}-2`;
     }
 
     // default
@@ -59,6 +64,7 @@ function createPandaFactory(sprite) {
 
   return function createPanda() {
     const panda = new Entity();
+    panda.audio = audio;
 
     panda.size.set(16, 16);
 

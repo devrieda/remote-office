@@ -1,0 +1,129 @@
+{
+  "imageURL": "/img/tiles.png",
+  "tileW": 16,
+  "tileH": 16,
+  "tiles": [
+    {
+      "name": "mv-1",
+      "index": [0, 0]
+    },
+    {
+      "name": "mv-2",
+      "index": [1, 0]
+    },
+    {
+      "name": "mv-3",
+      "index": [2, 0]
+    },
+    {
+      "name": "la-croix-1",
+      "index": [0, 1]
+    },
+    {
+      "name": "la-croix-2",
+      "index": [1, 1]
+    },
+    {
+      "name": "la-croix-3",
+      "index": [2, 1]
+    },
+    {
+      "name": "blue-moon-1",
+      "index": [0, 2]
+    },
+    {
+      "name": "blue-moon-2",
+      "index": [1, 2]
+    },
+    {
+      "name": "blue-moon-3",
+      "index": [2, 2]
+    },
+    {
+      "name": "coffee-1",
+      "index": [0, 3]
+    },
+    {
+      "name": "coffee-2",
+      "index": [1, 3]
+    },
+    {
+      "name": "coffee-3",
+      "index": [2, 3]
+    },
+    {
+      "name": "nerf-1",
+      "index": [3, 0]
+    },
+    {
+      "name": "nerf-2",
+      "index": [4, 0]
+    },
+    {
+      "name": "nerf-3",
+      "index": [5, 0]
+    }
+  ],
+  "animations": [
+    {
+      "name": "mv",
+      "frameLen": 0.12,
+      "frames": [
+        "mv-1",
+        "mv-1",
+        "mv-1",
+        "mv-2",
+        "mv-3",
+        "mv-2"
+      ]
+    },
+    {
+      "name": "laCroix",
+      "frameLen": 0.12,
+      "frames": [
+        "la-croix-1",
+        "la-croix-1",
+        "la-croix-1",
+        "la-croix-2",
+        "la-croix-3",
+        "la-croix-2"
+      ]
+    },
+    {
+      "name": "blueMoon",
+      "frameLen": 0.12,
+      "frames": [
+        "blue-moon-1",
+        "blue-moon-1",
+        "blue-moon-1",
+        "blue-moon-2",
+        "blue-moon-3",
+        "blue-moon-2"
+      ]
+    },
+    {
+      "name": "coffee",
+      "frameLen": 0.12,
+      "frames": [
+        "coffee-1",
+        "coffee-1",
+        "coffee-1",
+        "coffee-2",
+        "coffee-3",
+        "coffee-2"
+      ]
+    },
+    {
+      "name": "nerf",
+      "frameLen": 0.12,
+      "frames": [
+        "nerf-1",
+        "nerf-1",
+        "nerf-1",
+        "nerf-2",
+        "nerf-3",
+        "nerf-2"
+      ]
+    }
+  ]
+}

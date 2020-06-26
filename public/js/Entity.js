@@ -57,7 +57,7 @@ export default class Entity {
   playSounds(audioBoard, audioContext) {
     this.sounds.forEach(name => {
       audioBoard.playAudio(name, audioContext);
-    })
+    });
 
     this.sounds.clear();
   }

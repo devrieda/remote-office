@@ -1,10 +1,28 @@
 {
   "fx": {
-    "coin": {
-      "url": "/audio/coin.ogg"
+    "blueMoon": {
+      "url": "/audio/fx/blueMoon.ogg"
     },
-    "jump": {
-      "url": "/audio/jump.ogg"
+    "coffee": {
+      "url": "/audio/fx/coffee.ogg"
+    },
+    "damage": {
+      "url": "/audio/fx/damage.ogg"
+    },
+    "dart": {
+      "url": "/audio/fx/dart.ogg"
+    },
+    "laCroix": {
+      "url": "/audio/fx/laCroix.ogg"
+    },
+    "mv": {
+      "url": "/audio/fx/mv.ogg"
+    },
+    "nerf": {
+      "url": "/audio/fx/nerf.ogg"
+    },
+    "pop": {
+      "url": "/audio/fx/pop.ogg"
     }
   }
 }

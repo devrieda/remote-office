@@ -16,7 +16,7 @@ export function createBackgroundLayer(level, tiles, sprites) {
       if (!col) continue; // finished loading all cols
       for (let y = startIndexY; y <= endIndexY; ++y) {
         const tile = col[y];
-        if (!tile) continue; // finished loading all rows
+        if (!tile || !tile.name) continue; // finished loading all rows
 
         if (sprites.animations.has(tile.name)) {
           sprites.drawAnim(tile.name, context, x - startIndexX, y - startIndexY, level.totalTime);

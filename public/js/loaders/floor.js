@@ -11,12 +11,18 @@ export function createFloorLoader(entityFactory, context) {
     return Promise.all([
       loadSpriteSheet('floor-plan'),
       loadSpriteSheet('windows'),
-      loadAscii('collision'),
+      loadSpriteSheet('tiles'),
+      loadAscii('collision')
     ])
-    .then(([floorPlanSprites, windowSprites, collisionText]) => {
+    .then(([
+        floorPlanSprites,
+        windowSprites,
+        itemsSprites,
+        collisionText
+      ]) => {
       const floor = new Level();
       floor.name = name;
-      const grid = createGrid(71, 45, collisionText);
+      const grid = createGrid(71, 45);
 
       // black background
       floor.comp.layers.push(createColorLayer('#212123'))
@@ -30,9 +36,13 @@ export function createFloorLoader(entityFactory, context) {
       floor.comp.layers.push(spriteLayer);
 
       // collision
-      floor.tileCollider.addGrid(grid);
+      const collisionGrid = createCollisionGrid(71, 45, collisionText);
+      floor.tileCollider.addGrid(collisionGrid);
 
-      // 
+      // items
+      const itemsLayer = createBackgroundLayer(floor, collisionGrid, itemsSprites);
+      floor.comp.layers.push(itemsLayer);
+
       // windows
       const windowLayer = createBackgroundLayer(floor, grid, windowSprites);
       floor.comp.layers.push(windowLayer);
@@ -42,14 +52,42 @@ export function createFloorLoader(entityFactory, context) {
   }
 }
 
-function createGrid(width, height, collisionText) {
+function createGrid(width, height) {
+  const grid = new Matrix();
+
+  for (let i = 0; i < width; i++) {
+    for (let j = 0; j < height; j++) {
+      grid.set(i, j, { name: `${i}x${j}` });
+    }
+  }
+  return grid;
+}
+
+function createCollisionGrid(width, height, collisionText) {
   const rows = collisionText.split("\n");
   const grid = new Matrix();
 
   for (let i = 0; i < width; i++) {
     for (let j = 0; j < height; j++) {
-      const type = rows[j][i] === "x" ? "wall" : "";
-      grid.set(i, j, { name: `${i}x${j}`, type  });
+      // use types to place items
+      const value = rows[j][i];
+      const types = {
+        "b": "blueMoon",
+        "l": "laCroix",
+        "m": "mv",
+        "c": "coffee",
+        "n": "nerf",
+        "x": "wall"
+      }
+      const type = types[value] || "";
+
+      // only use walls for collisions
+      let name = type;
+      if (name === "wall") { name = ""; }
+
+      if (type !== "") {
+        grid.set(i, j, { name: name, type });
+      }
     }
   }
   return grid;
