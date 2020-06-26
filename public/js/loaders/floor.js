@@ -3,7 +3,9 @@ import Level from '../Level.js';
 import { createColorLayer  } from '../layers/color.js';
 import { createBackgroundLayer  } from '../layers/background.js';
 import { createSpriteLayer } from '../layers/sprites.js';
+import { createDashboardLayer } from '../layers/dashboard.js';
 import { loadSpriteSheet } from './sprite.js';
+import { loadFont } from './font.js';
 import { loadAscii } from './ascii.js';
 
 export function createFloorLoader(entityFactory, context) {
@@ -12,14 +14,17 @@ export function createFloorLoader(entityFactory, context) {
       loadSpriteSheet('floor-plan'),
       loadSpriteSheet('windows'),
       loadSpriteSheet('tiles'),
-      loadAscii('collision')
+      loadAscii('collision'),
+      loadFont()
     ])
     .then(([
         floorPlanSprites,
         windowSprites,
         itemsSprites,
-        collisionText
+        collisionText,
+        font
       ]) => {
+
       const floor = new Level();
       floor.name = name;
       const grid = createGrid(71, 45);
@@ -46,6 +51,10 @@ export function createFloorLoader(entityFactory, context) {
       // windows
       const windowLayer = createBackgroundLayer(floor, grid, windowSprites);
       floor.comp.layers.push(windowLayer);
+
+      // dashboard
+      const dashboardLayer = createDashboardLayer(font, floor, itemsSprites);
+      floor.comp.layers.push(dashboardLayer)
 
       return floor;
     });

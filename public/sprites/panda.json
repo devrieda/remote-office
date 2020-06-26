@@ -136,9 +136,9 @@
       "name": "run-right",
       "frameLen": 6,
       "frames": [
-        "run-right-nerf-1",
-        "run-right-nerf-2",
-        "run-right-nerf-3"
+        "run-right-1",
+        "run-right-2",
+        "run-right-3"
       ]
     },
     {

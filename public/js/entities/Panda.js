@@ -1,5 +1,6 @@
 import Entity from '../Entity.js';
 import Go from '../traits/Go.js';
+import Player from '../traits/Player.js';
 import Killable from '../traits/Killable.js';
 import Solid from '../traits/Solid.js';
 import Physics from '../traits/Physics.js';
@@ -18,16 +19,17 @@ export function loadPanda(audioContext) {
 }
 
 function createPandaFactory(sprite, audio) {
-  const nerf = true;
-  const modifier = nerf ? '-nerf' : '';
-
-  const runRight = sprite.animations.get(`run-right${modifier}`);
-  const runLeft  = sprite.animations.get(`run-left${modifier}`);
-  const runUp    = sprite.animations.get(`run-up${modifier}`);
-  const runDown  = sprite.animations.get(`run-down${modifier}`);
-
   function routeFrame(panda) {
-    const go = panda.traits.get(Go);
+    const player = panda.traits.get(Player);
+    const go     = panda.traits.get(Go);
+
+    const nerf = player.itemB === 'nerf-1';
+    const modifier = nerf ? '-nerf' : '';
+
+    const runRight = sprite.animations.get(`run-right${modifier}`);
+    const runLeft  = sprite.animations.get(`run-left${modifier}`);
+    const runUp    = sprite.animations.get(`run-up${modifier}`);
+    const runDown  = sprite.animations.get(`run-down${modifier}`);
 
     // running
     if (go.dirX > 0) {

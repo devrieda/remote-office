@@ -2,13 +2,11 @@ import Level from './Level.js';
 import Timer from './Timer.js';
 import { createLevelLoader } from './loaders/level.js';
 import { createFloorLoader } from './loaders/floor.js';
-import { loadFont } from './loaders/font.js';
 import { loadEntities } from './entities.js';
 import { makePlayer, findPlayers } from './player.js';
 import { setupKeyboard } from './input.js';
 import { createCameraLayer } from './layers/camera.js';
 import { createCollisionLayer } from './layers/collision.js';
-import { createDashboardLayer } from './layers/dashboard.js';
 import { createPlayerProgressLayer } from './layers/player-progress.js';
 import { createColorLayer } from './layers/color.js';
 import { createTextLayer } from './layers/text.js';
@@ -20,9 +18,8 @@ async function main(canvas) {
   const videoContext = canvas.getContext('2d');
   const audioContext = new AudioContext();
 
-  const [entityFactory, font] = await Promise.all([
+  const [entityFactory] = await Promise.all([
     loadEntities(audioContext),
-    loadFont()
   ]);
 
   const loadLevel = await createLevelLoader(entityFactory);
@@ -44,9 +41,6 @@ async function main(canvas) {
 
     panda.pos.set(576, 412);
     floor.entities.add(panda);
-
-    const dashboardLayer = createDashboardLayer(font, floor);
-    floor.comp.layers.push(dashboardLayer)
 
     // camera outline
     // floor.comp.layers.push(createCameraLayer(floor.camera));

@@ -7,11 +7,11 @@ export default class Player extends Trait {
     super();
     this.name = 'UNNAMED';
     this.mv   = 0;
-    this.life = 4;
+    this.life = 3;
 
     // placeholders for items
-    this.aItem = '';
-    this.bItem = '';
+    this.itemA = '';
+    this.itemB = '';
   }
 
   addMv(count) {
@@ -27,17 +27,17 @@ export default class Player extends Trait {
   }
 
   addBlueMoon() {
-    this.aItem = 'blueMoon';
+    this.itemA = 'blue-moon-1';
     this.queue(entity => entity.sounds.add('blueMoon'));
   }
 
   addLaCroix() {
-    this.aItem = 'laCroix';
+    this.itemA = 'la-croix-1';
     this.queue(entity => entity.sounds.add('laCroix'));
   }
 
   addNerf() {
-    this.bItem = 'nerf';
+    this.itemB = 'nerf-1';
     this.queue(entity => entity.sounds.add('nerf'));
   }
 }

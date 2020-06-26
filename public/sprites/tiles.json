@@ -62,6 +62,26 @@
     {
       "name": "nerf-3",
       "index": [5, 0]
+    },
+    {
+      "name": "life-1",
+      "index": [3, 1]
+    },
+    {
+      "name": "life-2",
+      "index": [4, 1]
+    },
+    {
+      "name": "mv-count",
+      "index": [5, 1]
+    },
+    {
+      "name": "B",
+      "index": [3, 2]
+    },
+    {
+      "name": "A",
+      "index": [4, 2]
     }
   ],
   "animations": [

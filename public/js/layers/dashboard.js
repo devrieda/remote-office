@@ -7,9 +7,33 @@ function getPlayerTrait(level) {
   }
 }
 
-export function createDashboardLayer(font, level) {
+export function createDashboardLayer(font, level, sprites) {
   const LINE1 = 3;
   const LINE2 = font.size + 3;
+
+  function drawItemB(context, itemB) {
+    context.beginPath();
+    context.rect(68.5, 2.5, 18, 17);
+    context.stroke();
+    context.fillRect(65, 7, 6, 8);
+    sprites.draw('B', context, 65, 3)
+
+    if (itemB !== "") {
+      sprites.draw(itemB, context, 70, 3);
+    }
+  }
+
+  function drawItemA(context, itemA) {
+    context.beginPath();
+    context.rect(94.5, 2.5, 18, 17);
+    context.stroke();
+    context.fillRect(90, 7, 6, 8);
+    sprites.draw('A', context, 91, 3)
+
+    if (itemA !== "") {
+      sprites.draw(itemA, context, 96, 3);
+    }
+  }
 
   return function drawDashboard(context) {
     // black background
@@ -17,13 +41,28 @@ export function createDashboardLayer(font, level) {
     context.fillRect(0, 0, context.canvas.width, 22);
 
     const playerTrait = getPlayerTrait(level);
+    const { name, mv, life, itemB, itemA } = playerTrait;
 
-    font.print(playerTrait.name, context, 10, LINE1);
-    // font.print(playerTrait.score.toString().padStart(6, '0'), context, 10, LINE2);
+    // motivosity
+    font.print('-  -', context, 8, LINE1);
+    sprites.draw('mv-count', context, 15, 1)
+    font.print(mv.toString().padStart(4, '0'), context, 8, LINE2);
 
-    // font.print('@x' + playerTrait.coins.toString().padStart(2, '0'), context, 96, LINE2);
+    // B / A
+    context.strokeStyle = '#68c2d3';
+    context.fillStyle = '#000';
+    drawItemB(context, itemB);
+    drawItemA(context, itemA);
 
-    font.print('FLOOR', context, 272, LINE1);
-    font.print(level.name, context, 288, LINE2);
+    // life
+    font.print('-LIFE-', context, 150, LINE1);
+    [148, 160, 172, 184].forEach((position, i) => {
+      const lifeType = life > i ? 'life-1' : 'life-2';
+      sprites.draw(lifeType, context, position, 7);
+    });
+
+    // level
+    font.print('-LEVEL-', context, 260, LINE1);
+    font.print('5TH', context, 283, LINE2);
   }
 }
