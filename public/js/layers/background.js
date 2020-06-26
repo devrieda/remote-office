@@ -8,8 +8,6 @@ export function createBackgroundLayer(level, tiles, sprites) {
 
   const context = buffer.getContext('2d');
 
-  console.log(tiles)
-
   function redraw(startIndexX, endIndexX, startIndexY, endIndexY) {
     context.clearRect(0, 0, buffer.width, buffer.height);
 

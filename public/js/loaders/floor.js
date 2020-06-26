@@ -32,6 +32,7 @@ export function createFloorLoader(entityFactory, context) {
       // collision
       floor.tileCollider.addGrid(grid);
 
+      // 
       // windows
       const windowLayer = createBackgroundLayer(floor, grid, windowSprites);
       floor.comp.layers.push(windowLayer);
@@ -47,7 +48,7 @@ function createGrid(width, height, collisionText) {
 
   for (let i = 0; i < width; i++) {
     for (let j = 0; j < height; j++) {
-      const type = rows[j][i] === "x" ? "ground" : "";
+      const type = rows[j][i] === "x" ? "wall" : "";
       grid.set(i, j, { name: `${i}x${j}`, type  });
     }
   }

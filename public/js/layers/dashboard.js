@@ -8,18 +8,22 @@ function getPlayerTrait(level) {
 }
 
 export function createDashboardLayer(font, level) {
-  const LINE1 = font.size;
-  const LINE2 = font.size * 2;
+  const LINE1 = 3;
+  const LINE2 = font.size + 3;
 
   return function drawDashboard(context) {
+    // black background
+    context.fillStyle = '#000';
+    context.fillRect(0, 0, context.canvas.width, 22);
+
     const playerTrait = getPlayerTrait(level);
 
-    font.print(playerTrait.name, context, 16, LINE1);
-    font.print(playerTrait.score.toString().padStart(6, '0'), context, 16, LINE2);
+    font.print(playerTrait.name, context, 10, LINE1);
+    font.print(playerTrait.score.toString().padStart(6, '0'), context, 10, LINE2);
 
     // font.print('@x' + playerTrait.coins.toString().padStart(2, '0'), context, 96, LINE2);
 
-    font.print('FLOOR', context, 266, LINE1);
-    font.print(level.name, context, 282, LINE2);
+    font.print('FLOOR', context, 272, LINE1);
+    font.print(level.name, context, 288, LINE2);
   }
 }
