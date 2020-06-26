@@ -1,0 +1,8 @@
+{
+  "imageURL": "/img/2-windows.png",
+  "tileW": 16,
+  "tileH": 16,
+
+  "dynamic": true,
+  "size": [75, 50]
+}

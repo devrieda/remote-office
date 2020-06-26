@@ -15,6 +15,15 @@ export function loadSpriteSheet(name) {
         sheetSpec.tileH
       );
 
+      if (sheetSpec.dynamic) {
+        const [width, height] = sheetSpec.size;
+        for (let i = 0; i < width; i++) {
+          for (let j = 0; j < height; j++) {
+            sprites.defineTile(`${i}x${j}`, i, j);
+          }
+        }
+      }
+
       if (sheetSpec.tiles) {
         sheetSpec.tiles.forEach(tileSpec => {
           sprites.defineTile(tileSpec.name, tileSpec.index[0], tileSpec.index[1]);

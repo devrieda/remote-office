@@ -19,7 +19,7 @@ export function createDashboardLayer(font, level) {
 
     // font.print('@x' + playerTrait.coins.toString().padStart(2, '0'), context, 96, LINE2);
 
-    font.print('FLOOR', context, 202, LINE1);
-    font.print(level.name, context, 218, LINE2);
+    font.print('FLOOR', context, 266, LINE1);
+    font.print(level.name, context, 282, LINE2);
   }
 }

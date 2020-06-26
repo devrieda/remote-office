@@ -1,9 +1,10 @@
 import Level from './Level.js';
 import Timer from './Timer.js';
 import { createLevelLoader } from './loaders/level.js';
+import { createFloorLoader } from './loaders/floor.js';
 import { loadFont } from './loaders/font.js';
 import { loadEntities } from './entities.js';
-import { makePlayer, createPlayerEnv, findPlayers } from './player.js';
+import { makePlayer, findPlayers } from './player.js';
 import { setupKeyboard } from './input.js';
 import { createCameraLayer } from './layers/camera.js';
 import { createCollisionLayer } from './layers/collision.js';
@@ -25,52 +26,34 @@ async function main(canvas) {
   ]);
 
   const loadLevel = await createLevelLoader(entityFactory);
+  const loadFloor = await createFloorLoader(entityFactory, videoContext);
 
   const sceneRunner = new SceneRunner();
   const panda = entityFactory.panda();
+  panda.size.set(4, 4)
+  panda.offset.x = 6;
+  panda.offset.y = 12;
+
   makePlayer(panda, "PANDA");
 
   const inputRouter = setupKeyboard(window);
   inputRouter.addReceiver(panda);
 
   async function runLevel(name) {
-    const level = await loadLevel(name);
+    const floor = await loadFloor(name);
 
-    const loadScreen = new Scene();
-    loadScreen.comp.layers.push(createColorLayer('#000'));
-    loadScreen.comp.layers.push(createTextLayer(font, `Loading ${name}`));
-    sceneRunner.addScene(loadScreen);
-    sceneRunner.runNext();
+    panda.pos.set(220, 220);
+    floor.entities.add(panda);
 
-    level.events.listen(Level.EVENT_TRIGGER, (spec, trigger, touches) => {
-      if (spec.type === 'goto') {
-        for (const _ of findPlayers(touches)) {
-          runLevel(spec.name);
-          return;
-        }
-      }
-    });
+    const dashboardLayer = createDashboardLayer(font, floor);
+    floor.comp.layers.push(dashboardLayer)
 
-    const playerProgressLayer = createPlayerProgressLayer(font, level); 
-    const dashboardLayer = createDashboardLayer(font, level);
-
-    panda.pos.set(96, 120);
-    level.entities.add(panda);
-
-    const playerEnv = createPlayerEnv(panda);
-    level.entities.add(playerEnv);
-
-    const waitScreen = new TimedScene();
-    waitScreen.comp.layers.push(createColorLayer('#000'));
-    waitScreen.comp.layers.push(dashboardLayer);
-    waitScreen.comp.layers.push(playerProgressLayer);
-    sceneRunner.addScene(waitScreen);
-
+    // camera outline
+    // floor.comp.layers.push(createCameraLayer(floor.camera));
     // show collision outlines
-    level.comp.layers.push(createCollisionLayer(level));
-    level.comp.layers.push(dashboardLayer)
-    sceneRunner.addScene(level);
+    // floor.comp.layers.push(createCollisionLayer(floor))
 
+    sceneRunner.addScene(floor);
     sceneRunner.runNext();
   }
 
