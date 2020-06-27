@@ -1,5 +1,6 @@
 import { loadPanda } from './entities/Panda.js';
 import { loadDart } from './entities/Dart.js';
+import { loadEggbag } from './entities/Eggbag.js';
 
 export function loadEntities(audioContext) {
   const entityFactories = {};
@@ -11,6 +12,7 @@ export function loadEntities(audioContext) {
   return Promise.all([
     loadPanda(audioContext).then(addAs('panda')),
     loadDart(audioContext).then(addAs('dart')),
+    loadEggbag(audioContext).then(addAs('eggbag')),
   ])
   .then(() => entityFactories);
 }

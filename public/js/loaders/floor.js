@@ -36,6 +36,14 @@ export function createFloorLoader(entityFactory, context) {
       const collisionGrid = createCollisionGrid(71, 45, collisionText);
       floor.tileCollider.addGrid(collisionGrid);
 
+      const entityCoords = findEntityCoords(71, 45, collisionText);
+      entityCoords.forEach(({ name, x, y }) => {
+        const createEntity = entityFactory[name];
+        const entity = createEntity();
+        entity.pos.set(x * 16, y * 16);
+        floor.entities.add(entity);
+      });
+
       // floor plan layer
       const floorLayer = createBackgroundLayer(floor, grid, floorPlanSprites);
       floor.comp.layers.push(floorLayer);
@@ -70,6 +78,21 @@ function createGrid(width, height) {
     }
   }
   return grid;
+}
+
+function findEntityCoords(width, height, collisionText) {
+  const rows = collisionText.split("\n");
+
+  const entities = [];
+
+  for (let x = 0; x < width; x++) {
+    for (let y = 0; y < height; y++) {
+      if (rows[y][x] === 'e') {
+        entities.push({ name: 'eggbag', x, y });
+      }
+    }
+  }
+  return entities;
 }
 
 function createCollisionGrid(width, height, collisionText) {

@@ -1,0 +1,32 @@
+{
+  "imageURL": "/img/characters.png",
+  "frames": [
+    {
+      "name": "eggbag-1",
+      "rect": [0, 96, 16, 16]
+    },
+    {
+      "name": "eggbag-2",
+      "rect": [16, 96, 16, 16]
+    },
+    {
+      "name": "eggbag-3",
+      "rect": [32, 96, 16, 16]
+    }
+  ],
+
+  "animations": [
+    {
+      "name": "eggbag",
+      "frameLen": 0.10,
+      "frames": [
+        "eggbag-1",
+        "eggbag-1",
+        "eggbag-1",
+        "eggbag-2",
+        "eggbag-3",
+        "eggbag-2"
+      ]
+    }
+  ]
+}
