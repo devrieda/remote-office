@@ -1,7 +1,6 @@
 import Level from './Level.js';
 import Timer from './Timer.js';
 import { createLevelLoader } from './loaders/level.js';
-import { createFloorLoader } from './loaders/floor.js';
 import { loadEntities } from './entities.js';
 import { makePlayer, findPlayers } from './player.js';
 import { setupKeyboard } from './input.js';
@@ -22,8 +21,7 @@ async function main(canvas) {
     loadEntities(audioContext),
   ]);
 
-  const loadLevel = await createLevelLoader(entityFactory);
-  const loadFloor = await createFloorLoader(entityFactory, videoContext);
+  const loadLevel = await createLevelLoader(entityFactory, videoContext);
 
   const sceneRunner = new SceneRunner();
   const panda = entityFactory.panda();
@@ -36,17 +34,17 @@ async function main(canvas) {
   inputRouter.addReceiver(panda);
 
   async function runLevel(name) {
-    const floor = await loadFloor(name);
+    const level = await loadLevel(name);
 
     panda.pos.set(576, 412);
-    floor.entities.add(panda);
+    level.entities.add(panda);
 
     // camera outline
-    // floor.comp.layers.push(createCameraLayer(floor.camera));
+    // level.comp.layers.push(createCameraLayer(level.camera));
     // show collision outlines
-    // floor.comp.layers.push(createCollisionLayer(floor))
+    // level.comp.layers.push(createCollisionLayer(level))
 
-    sceneRunner.addScene(floor);
+    sceneRunner.addScene(level);
     sceneRunner.runNext();
   }
 
