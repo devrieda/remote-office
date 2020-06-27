@@ -32,23 +32,23 @@ export function createFloorLoader(entityFactory, context) {
       // black background
       floor.comp.layers.push(createColorLayer('#212123'))
 
-      // floor plan
-      const floorLayer = createBackgroundLayer(floor, grid, floorPlanSprites);
-      floor.comp.layers.push(floorLayer);
-
-      // entities
-      const spriteLayer = createSpriteLayer(floor.entities);
-      floor.comp.layers.push(spriteLayer);
-
-      // collision
+      // collision grid
       const collisionGrid = createCollisionGrid(71, 45, collisionText);
       floor.tileCollider.addGrid(collisionGrid);
 
-      // items
+      // floor plan layer
+      const floorLayer = createBackgroundLayer(floor, grid, floorPlanSprites);
+      floor.comp.layers.push(floorLayer);
+
+      // entities layer
+      const spriteLayer = createSpriteLayer(floor.entities);
+      floor.comp.layers.push(spriteLayer);
+
+      // items layer
       const itemsLayer = createBackgroundLayer(floor, collisionGrid, itemsSprites);
       floor.comp.layers.push(itemsLayer);
 
-      // windows
+      // windows layer
       const windowLayer = createBackgroundLayer(floor, grid, windowSprites);
       floor.comp.layers.push(windowLayer);
 
@@ -76,10 +76,10 @@ function createCollisionGrid(width, height, collisionText) {
   const rows = collisionText.split("\n");
   const grid = new Matrix();
 
-  for (let i = 0; i < width; i++) {
-    for (let j = 0; j < height; j++) {
+  for (let x = 0; x < width; x++) {
+    for (let y = 0; y < height; y++) {
       // use types to place items
-      const value = rows[j][i];
+      const value = rows[y][x];
       const types = {
         "b": "blueMoon",
         "l": "laCroix",
@@ -95,7 +95,7 @@ function createCollisionGrid(width, height, collisionText) {
       if (name === "wall") { name = ""; }
 
       if (type !== "") {
-        grid.set(i, j, { name: name, type });
+        grid.set(x, y, { name: name, type });
       }
     }
   }

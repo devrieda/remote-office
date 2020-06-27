@@ -1,6 +1,7 @@
 import Keyboard from './KeyboardState.js';
 import InputRouter from './InputRouter.js';
-import Go, { Headings } from './traits/Go.js';
+import Go from './traits/Go.js';
+import Player from './traits/Player.js';
 
 export function setupKeyboard(window) {
   const input = new Keyboard();
@@ -10,12 +11,14 @@ export function setupKeyboard(window) {
 
   // B button
   input.addMapping('KeyH', keyState => {
-    console.log('press B', keyState);
+    if (keyState !== 1) { return; }
+    router.route(entity => entity.traits.get(Player).pressB(entity));
   });
 
   // A button
   input.addMapping('KeyJ', keyState => {
-    console.log('press A', keyState);
+    if (keyState !== 1) { return; }
+    router.route(entity => entity.traits.get(Player).pressA(entity));
   });
 
   // D-pad UP

@@ -27,9 +27,8 @@ async function main(canvas) {
 
   const sceneRunner = new SceneRunner();
   const panda = entityFactory.panda();
-  panda.size.set(4, 4)
-  panda.offset.x = 6;
-  panda.offset.y = 12;
+  panda.size.set(4, 4);
+  panda.offset.set(6, 12);
 
   makePlayer(panda, "PANDA");
 

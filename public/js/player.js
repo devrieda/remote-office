@@ -4,6 +4,7 @@ import Player from './traits/Player.js';
 export function makePlayer(entity, name) {
   const player = new Player();
   player.name = name;
+
   entity.addTrait(player);
 }
 
