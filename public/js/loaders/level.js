@@ -36,6 +36,7 @@ export function createLevelLoader(entityFactory, context) {
       const collisionGrid = createCollisionGrid(71, 45, collisionText);
       level.tileCollider.addGrid(collisionGrid);
 
+      // spawn entities
       const entityCoords = findEntityCoords(71, 45, collisionText);
       entityCoords.forEach(({ name, x, y }) => {
         const createEntity = entityFactory[name];

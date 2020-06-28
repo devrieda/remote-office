@@ -1,5 +1,6 @@
 import Trait from '../Trait.js';
 import Go, { Headings } from './Go.js';
+import Killable from './Killable.js';
 
 const MAX_LIFE = 4;
 
@@ -13,6 +14,12 @@ export default class Player extends Trait {
     // placeholders for items
     this.itemA = '';
     this.itemB = '';
+
+    // damage
+    this.damaged  = false;
+    this.weakened = false;
+    this.weakenedTime = 0;
+    this.weakenedFor  = 2;
   }
 
   addMv(count) {
@@ -64,12 +71,18 @@ export default class Player extends Trait {
 
   drinkLaCroix() {
     this.itemA = '';
-    this.queue(entity => entity.sounds.add('coffee'));
+    this.queue(entity => entity.sounds.add('drink'));
   }
 
   drinkBlueMoon() {
     this.itemA = '';
-    this.life--;
+    this.addDamage(1);
+  }
+
+  addDamage(count) {
+    this.life -= count;
+    this.damaged  = true;
+    this.weakened = true;
     this.queue(entity => entity.sounds.add('damage'));
   }
 
@@ -78,8 +91,12 @@ export default class Player extends Trait {
     this.queue(entity => entity.sounds.add('dart'));
   }
 
-    // emit dart
   update(entity, gameContext, level) {
+    this.emitDart(entity, gameContext, level);
+    this.sustainDamage(entity, gameContext, level);
+  }
+
+  emitDart(entity, gameContext, level) {
     if (!this.shoot) { return; }
 
     const speed = 100;
@@ -113,5 +130,42 @@ export default class Player extends Trait {
     level.entities.add(dart);
 
     this.shoot = false;
+  }
+
+  sustainDamage(entity, { deltaTime }, level) {
+    // weakened state (flashing)...
+    if (this.weakened) {
+      this.weakenedTime += deltaTime;
+      if (this.weakenedTime > this.weakenedFor) {
+        this.weakened = false;
+        this.weakenedTime = 0;
+      }
+    }
+
+    if (!this.damaged) { return; }
+
+    // die... if they're dead
+    const killable = entity.traits.get(Killable);
+    if (this.life === 0) {
+      killable.kill();
+      this.damaged = false;
+    }
+
+    // bump them back a square
+    const go = entity.traits.get(Go);
+    if (go.heading === Headings.RIGHT) {
+      entity.pos.x -= 16;
+
+    } else if (go.heading === Headings.LEFT) {
+      entity.pos.x += 16;
+
+    } else if (go.heading === Headings.UP) {
+      entity.pos.y -= 16;
+
+    } else if (go.heading === Headings.DOWN) {
+      entity.pos.y -= 16;
+    }
+
+    this.damaged = false;
   }
 }

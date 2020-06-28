@@ -15,6 +15,9 @@
     "laCroix": {
       "url": "/audio/fx/laCroix.ogg"
     },
+    "drink": {
+      "url": "/audio/fx/drink.ogg"
+    },
     "mv": {
       "url": "/audio/fx/mv.ogg"
     },

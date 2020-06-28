@@ -67,6 +67,10 @@
       "rect": [80, 0, 16, 16]
     },
     {
+      "name": "run-down-nerf-4",
+      "rect": [999, 0, 16, 16]
+    },
+    {
       "name": "run-up-nerf-1",
       "rect": [48, 16, 16, 16]
     },
@@ -77,6 +81,10 @@
     {
       "name": "run-up-nerf-3",
       "rect": [80, 16, 16, 16]
+    },
+    {
+      "name": "run-up-nerf-4",
+      "rect": [999, 16, 16, 16]
     },
     {
       "name": "run-left-nerf-1",
@@ -91,6 +99,10 @@
       "rect": [80, 32, 16, 16]
     },
     {
+      "name": "run-left-nerf-4",
+      "rect": [999, 32, 16, 16]
+    },
+    {
       "name": "run-right-nerf-1",
       "rect": [48, 48, 16, 16]
     },
@@ -101,10 +113,24 @@
     {
       "name": "run-right-nerf-3",
       "rect": [80, 48, 16, 16]
+    },
+    {
+      "name": "run-right-nerf-4",
+      "rect": [999, 48, 16, 16]
     }
   ],
 
   "animations": [
+    {
+      "name": "dead",
+      "frameLen": 0.08,
+      "frames": [
+        "run-down-1",
+        "run-right-1",
+        "run-up-1",
+        "run-left-1"
+      ]
+    },
     {
       "name": "run-down",
       "frameLen": 6,
@@ -176,7 +202,42 @@
         "run-right-nerf-2",
         "run-right-nerf-3"
       ]
+    },
+    {
+      "name": "run-down-nerf-damage",
+      "frameLen": 6,
+      "frames": [
+        "run-down-nerf-1",
+        "run-down-nerf-4",
+        "run-down-nerf-3"
+      ]
+    },
+    {
+      "name": "run-up-nerf-damage",
+      "frameLen": 6,
+      "frames": [
+        "run-up-nerf-1",
+        "run-up-nerf-4",
+        "run-up-nerf-3"
+      ]
+    },
+    {
+      "name": "run-left-nerf-damage",
+      "frameLen": 6,
+      "frames": [
+        "run-left-nerf-1",
+        "run-left-nerf-4",
+        "run-left-nerf-3"
+      ]
+    },
+    {
+      "name": "run-right-nerf-damage",
+      "frameLen": 6,
+      "frames": [
+        "run-right-nerf-1",
+        "run-right-nerf-4",
+        "run-right-nerf-3"
+      ]
     }
-
   ]
 }

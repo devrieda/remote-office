@@ -12,6 +12,18 @@
     {
       "name": "eggbag-3",
       "rect": [32, 96, 16, 16]
+    },
+    {
+      "name": "eggbag-4",
+      "rect": [48, 96, 16, 16]
+    },
+    {
+      "name": "eggbag-5",
+      "rect": [64, 96, 16, 16]
+    },
+    {
+      "name": "eggbag-6",
+      "rect": [80, 96, 16, 16]
     }
   ],
 
@@ -26,6 +38,15 @@
         "eggbag-2",
         "eggbag-3",
         "eggbag-2"
+      ]
+    },
+    {
+      "name": "dead",
+      "frameLen": 0.06,
+      "frames": [
+        "eggbag-4",
+        "eggbag-5",
+        "eggbag-6"
       ]
     }
   ]

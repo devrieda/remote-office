@@ -5,7 +5,7 @@ export default class Killable extends Trait {
     super();
     this.dead = false;
     this.deadTime = 0;
-    this.removeAfter = 0;
+    this.removeAfter = 2;
   }
 
   kill() {

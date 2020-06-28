@@ -40,8 +40,19 @@ export function createDashboardLayer(font, level, sprites) {
     context.fillStyle = '#000';
     context.fillRect(0, 0, context.canvas.width, 22);
 
+
+    let mv = 0;
+    let life = 0;
+    let itemB = '';
+    let itemA = '';
+
     const playerTrait = getPlayerTrait(level);
-    const { name, mv, life, itemB, itemA } = playerTrait;
+    if (playerTrait) {
+      mv = playerTrait.mv;
+      life = playerTrait.life;
+      itemB = playerTrait.itemB;
+      itemA = playerTrait.itemA;
+    }
 
     // motivosity
     font.print('-  -', context, 8, LINE1);

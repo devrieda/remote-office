@@ -3,6 +3,7 @@ import Trait from '../Trait.js';
 import Velocity from '../traits/Velocity.js';
 import Killable from '../traits/Killable.js';
 import Physics from '../traits/Physics.js';
+import Weapon from '../traits/Weapon.js';
 import { loadSpriteSheet } from '../loaders/sprite.js';
 
 export function loadDart() {
@@ -33,13 +34,13 @@ class Behavior extends Trait {
     super();
   }
 
+  // the dart dies when it hits something
   obstruct(entity, side) {
     entity.traits.get(Killable).kill();
   }
 
-  // collides(us, them) {
-  //   console.log(us, them);
-  // }
+  collides(us, them) {
+  }
 }
 
 function createDartFactory(sprite) {
@@ -61,7 +62,10 @@ function createDartFactory(sprite) {
     dart.addTrait(new Velocity());
     dart.addTrait(new Killable());
     dart.addTrait(new Physics());
+    dart.addTrait(new Weapon());
     dart.addTrait(new Behavior());
+
+    dart.traits.get(Killable).removeAfter = 0;
 
     dart.draw = drawDart;
     return dart;

@@ -19,8 +19,9 @@ export function loadPanda(audioContext) {
 
 function createPandaFactory(sprite, audio) {
   function routeFrame(panda) {
-    const player = panda.traits.get(Player);
-    const go     = panda.traits.get(Go);
+    const player   = panda.traits.get(Player);
+    const go       = panda.traits.get(Go);
+    const killable = panda.traits.get(Killable);
 
     const nerf = player.itemB === 'nerf-1';
     const modifier = nerf ? '-nerf' : '';
@@ -29,6 +30,9 @@ function createPandaFactory(sprite, audio) {
     const runLeft  = sprite.animations.get(`run-left${modifier}`);
     const runUp    = sprite.animations.get(`run-up${modifier}`);
     const runDown  = sprite.animations.get(`run-down${modifier}`);
+    const dead     = sprite.animations.get('dead');
+
+    if (killable.dead) { return dead(killable.deadTime); }
 
     // running
     if (go.dirX > 0) {
@@ -66,7 +70,6 @@ function createPandaFactory(sprite, audio) {
   return function createPanda() {
     const panda = new Entity();
     panda.audio = audio;
-
     panda.size.set(16, 16);
 
     panda.addTrait(new Physics());
@@ -74,7 +77,7 @@ function createPandaFactory(sprite, audio) {
     panda.addTrait(new Go());
     panda.addTrait(new Killable());
 
-    panda.traits.get(Killable).removeAfter = 0;
+    panda.traits.get(Killable).removeAfter = 1;
     panda.draw = drawPanda;
 
     return panda;
