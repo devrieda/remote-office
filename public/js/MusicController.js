@@ -12,14 +12,6 @@ export default class MusicController {
     audio.playbackRate = speed;
   }
 
-  playHurryTheme() {
-    const audio = this.player.playTrack('hurry');
-    audio.loop = false;
-    audio.addEventListener('ended', () => {
-      this.playTheme(1.3);
-    }, { once: true });
-  }
-
   pause() {
     this.player.pauseAll();
   }

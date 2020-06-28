@@ -36,7 +36,7 @@ async function main(canvas) {
   async function runLevel(name) {
     const level = await loadLevel(name);
 
-    panda.pos.set(576, 412);
+    panda.pos.set(464, 464);
     level.entities.add(panda);
 
     // camera outline

@@ -31,11 +31,7 @@ export default class Rewardable extends Trait {
     if (!this.spawnReward) { return; }
 
     this.rewardTime += deltaTime;
-
-    console.log(this.rewardTime, this.rewardAfter);
-
     if (this.rewardTime > this.rewardAfter) {
-
         // replace the entity with a reward!
         const random = Math.floor(Math.random() * this.rewards.length);
         const type = this.rewards[random];

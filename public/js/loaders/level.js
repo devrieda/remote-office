@@ -4,6 +4,7 @@ import { createColorLayer  } from '../layers/color.js';
 import { createBackgroundLayer  } from '../layers/background.js';
 import { createSpriteLayer } from '../layers/sprites.js';
 import { createDashboardLayer } from '../layers/dashboard.js';
+import { loadMusicSheet } from './music.js';
 import { loadSpriteSheet } from './sprite.js';
 import { loadFont } from './font.js';
 import { loadAscii } from './ascii.js';
@@ -14,6 +15,7 @@ export function createLevelLoader(entityFactory, context) {
       loadSpriteSheet('floor-plan'),
       loadSpriteSheet('windows'),
       loadSpriteSheet('tiles'),
+      loadMusicSheet('floor'),
       loadAscii('collision'),
       loadFont()
     ])
@@ -21,12 +23,16 @@ export function createLevelLoader(entityFactory, context) {
         floorPlanSprites,
         windowSprites,
         itemsSprites,
+        musicPlayer,
         collisionText,
         font
       ]) => {
 
       const level = new Level();
       level.name = name;
+      level.music.setPlayer(musicPlayer);
+      level.music.playTheme();
+
       const grid = createGrid(71, 45);
 
       // remember the sprites for spawning later
