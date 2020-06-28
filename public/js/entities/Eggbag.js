@@ -6,6 +6,7 @@ import Weapon from '../traits/Weapon.js';
 import PendulumMove from '../traits/PendulumMove.js';
 import Solid from '../traits/Solid.js';
 import Physics from '../traits/Physics.js';
+import Rewardable from '../traits/Rewardable.js';
 import { loadSpriteSheet } from '../loaders/sprite.js';
 import { loadAudioBoard } from '../loaders/audio.js';
 
@@ -29,18 +30,27 @@ class Behavior extends Trait {
     if (killable.dead) { return; }
 
     // if this is a weapon, we die
-    const weapon = them.traits.get(Weapon);
-    if (weapon) {
-      them.traits.get(Killable).kill();
-      killable.kill();
-      this.queue(entity => entity.sounds.add('splat'));
+    if (them.traits.get(Weapon)) {
+      this.die(us, them);
     }
 
-    // if this is a player
+    // cause damage to the player
     const player = them.traits.get(Player);
     if (player) {
       player.addDamage(1);
     }
+  }
+
+  die(us, them) {
+    // uses up the dart
+    them.traits.get(Killable).kill();
+
+    // die
+    us.traits.get(Killable).kill();
+    this.queue(entity => entity.sounds.add('splat'));
+
+    // reward the player!
+    us.traits.get(Rewardable).reward();
   }
 }
 
@@ -69,6 +79,7 @@ function createEggbagFactory(sprite, audio) {
     eggbag.addTrait(new PendulumMove());
     eggbag.addTrait(new Behavior());
     eggbag.addTrait(new Killable());
+    eggbag.addTrait(new Rewardable());
 
     eggbag.traits.get(Killable).removeAfter = 0.18;
     eggbag.draw = drawEggbag;

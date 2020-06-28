@@ -23,13 +23,14 @@ function createPandaFactory(sprite, audio) {
     const go       = panda.traits.get(Go);
     const killable = panda.traits.get(Killable);
 
-    const nerf = player.itemB === 'nerf-1';
-    const modifier = nerf ? '-nerf' : '';
+    const nerf = player.itemB === 'nerf-1' ? '-nerf' : '';
+    const weak = player.weakened ? '-weak' : '';
 
-    const runRight = sprite.animations.get(`run-right${modifier}`);
-    const runLeft  = sprite.animations.get(`run-left${modifier}`);
-    const runUp    = sprite.animations.get(`run-up${modifier}`);
-    const runDown  = sprite.animations.get(`run-down${modifier}`);
+
+    const runRight = sprite.animations.get(`run-right${nerf}${weak}`);
+    const runLeft  = sprite.animations.get(`run-left${nerf}${weak}`);
+    const runUp    = sprite.animations.get(`run-up${nerf}${weak}`);
+    const runDown  = sprite.animations.get(`run-down${nerf}${weak}`);
     const dead     = sprite.animations.get('dead');
 
     if (killable.dead) { return dead(killable.deadTime); }
@@ -50,13 +51,13 @@ function createPandaFactory(sprite, audio) {
 
     // not running, but make sure they're facing the right way!
     if (go.heading === Headings.RIGHT) {
-      return `run-right${modifier}-2`;
+      return `run-right${nerf}-2`;
     } else if (go.heading === Headings.LEFT) {
-      return `run-left${modifier}-2`;
+      return `run-left${nerf}-2`;
     } else if (go.heading === Headings.DOWN) {
-      return `run-down${modifier}-2`;
+      return `run-down${nerf}-2`;
     } else if (go.heading === Headings.UP) {
-      return `run-up${modifier}-2`;
+      return `run-up${nerf}-2`;
     }
 
     // default

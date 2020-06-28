@@ -29,6 +29,9 @@ export function createLevelLoader(entityFactory, context) {
       level.name = name;
       const grid = createGrid(71, 45);
 
+      // remember the sprites for spawning later
+      level.itemsSprites = itemsSprites;
+
       // black background
       level.comp.layers.push(createColorLayer('#212123'))
 
@@ -73,9 +76,9 @@ export function createLevelLoader(entityFactory, context) {
 function createGrid(width, height) {
   const grid = new Matrix();
 
-  for (let i = 0; i < width; i++) {
-    for (let j = 0; j < height; j++) {
-      grid.set(i, j, { name: `${i}x${j}` });
+  for (let x = 0; x < width; x++) {
+    for (let y = 0; y < height; y++) {
+      grid.set(x, y, { name: `${x}x${y}` });
     }
   }
   return grid;

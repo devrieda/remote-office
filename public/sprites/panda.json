@@ -18,6 +18,10 @@
       "rect": [32, 0, 16, 16]
     },
     {
+      "name": "run-down-4",
+      "rect": [999, 0, 16, 16]
+    },
+    {
       "name": "run-up-1",
       "rect": [0, 16, 16, 16]
     },
@@ -28,6 +32,10 @@
     {
       "name": "run-up-3",
       "rect": [32, 16, 16, 16]
+    },
+    {
+      "name": "run-up-4",
+      "rect": [999, 16, 16, 16]
     },
     {
       "name": "run-left-1",
@@ -42,6 +50,10 @@
       "rect": [32, 32, 16, 16]
     },
     {
+      "name": "run-left-4",
+      "rect": [999, 32, 16, 16]
+    },
+    {
       "name": "run-right-1",
       "rect": [0, 48, 16, 16]
     },
@@ -53,7 +65,10 @@
       "name": "run-right-3",
       "rect": [32, 48, 16, 16]
     },
-
+    {
+      "name": "run-right-4",
+      "rect": [999, 48, 16, 16]
+    },
     {
       "name": "run-down-nerf-1",
       "rect": [48, 0, 16, 16]
@@ -168,6 +183,43 @@
       ]
     },
     {
+      "name": "run-down-weak",
+      "frameLen": 6,
+      "frames": [
+        "run-down-1",
+        "run-down-4",
+        "run-down-3"
+      ]
+    },
+    {
+      "name": "run-up-weak",
+      "frameLen": 6,
+      "frames": [
+        "run-up-1",
+        "run-up-4",
+        "run-up-3"
+      ]
+    },
+    {
+      "name": "run-left-weak",
+      "frameLen": 6,
+      "frames": [
+        "run-left-1",
+        "run-left-4",
+        "run-left-3"
+      ]
+    },
+    {
+      "name": "run-right-weak",
+      "frameLen": 6,
+      "frames": [
+        "run-right-1",
+        "run-right-4",
+        "run-right-3"
+      ]
+    },
+
+    {
       "name": "run-down-nerf",
       "frameLen": 6,
       "frames": [
@@ -204,7 +256,7 @@
       ]
     },
     {
-      "name": "run-down-nerf-damage",
+      "name": "run-down-nerf-weak",
       "frameLen": 6,
       "frames": [
         "run-down-nerf-1",
@@ -213,7 +265,7 @@
       ]
     },
     {
-      "name": "run-up-nerf-damage",
+      "name": "run-up-nerf-weak",
       "frameLen": 6,
       "frames": [
         "run-up-nerf-1",
@@ -222,7 +274,7 @@
       ]
     },
     {
-      "name": "run-left-nerf-damage",
+      "name": "run-left-nerf-weak",
       "frameLen": 6,
       "frames": [
         "run-left-nerf-1",
@@ -231,7 +283,7 @@
       ]
     },
     {
-      "name": "run-right-nerf-damage",
+      "name": "run-right-nerf-weak",
       "frameLen": 6,
       "frames": [
         "run-right-nerf-1",

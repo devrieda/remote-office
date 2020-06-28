@@ -80,10 +80,11 @@ export default class Player extends Trait {
   }
 
   addDamage(count) {
-    this.life -= count;
-    this.damaged  = true;
-    this.weakened = true;
-    this.queue(entity => entity.sounds.add('damage'));
+    if (!this.weakened) {
+      this.damaged = true;
+      this.life -= count;
+      this.queue(entity => entity.sounds.add('damage'));
+    }
   }
 
   shootDart() {
@@ -94,6 +95,7 @@ export default class Player extends Trait {
   update(entity, gameContext, level) {
     this.emitDart(entity, gameContext, level);
     this.sustainDamage(entity, gameContext, level);
+    this.recoverFromDamage(entity, gameContext, level);
   }
 
   emitDart(entity, gameContext, level) {
@@ -133,22 +135,15 @@ export default class Player extends Trait {
   }
 
   sustainDamage(entity, { deltaTime }, level) {
-    // weakened state (flashing)...
-    if (this.weakened) {
-      this.weakenedTime += deltaTime;
-      if (this.weakenedTime > this.weakenedFor) {
-        this.weakened = false;
-        this.weakenedTime = 0;
-      }
-    }
-
     if (!this.damaged) { return; }
 
-    // die... if they're dead
     const killable = entity.traits.get(Killable);
-    if (this.life === 0) {
+
+    // die... if they're dead
+    if (this.life === 0 && !killable.dead) {
       killable.kill();
       this.damaged = false;
+      this.weakened = true;
     }
 
     // bump them back a square
@@ -167,5 +162,17 @@ export default class Player extends Trait {
     }
 
     this.damaged = false;
+    this.weakened = true;
+  }
+
+  // weakened state (flashing)...
+  recoverFromDamage(entity, { deltaTime }, level) {
+    if (!this.weakened) { return; }
+
+    this.weakenedTime += deltaTime;
+    if (this.weakenedTime > this.weakenedFor) {
+      this.weakened = false;
+      this.weakenedTime = 0;
+    }
   }
 }

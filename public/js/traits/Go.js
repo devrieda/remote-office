@@ -1,4 +1,5 @@
 import Trait from '../Trait.js';
+import Killable from './Killable.js';
 
 export const Headings = {
   UP:    Symbol('up'),
@@ -22,6 +23,11 @@ export default class Go extends Trait {
   }
 
   update(entity, { deltaTime }) {
+    const killable = entity.traits.get(Killable);
+    if (killable.dead) {
+      this.speed = 0;
+    }
+
     // move left/right
     if (this.dirX !== 0) {
       this.distanceX += Math.abs(entity.vel.x) * deltaTime;
