@@ -21,7 +21,7 @@ export function createPlayerProgressLayer(font, level) {
 
     font.print(`${level.name} FLOOR`, context, size * 12, size * 12);
 
-    font.print('x ' + player.lives.toString().padStart(3, ' '), context, size * 16, size * 16);
+    font.print('x ' + player.life.toString().padStart(3, ' '), context, size * 16, size * 16);
 
     spriteBufferContext.clearRect(0, 0, spriteBuffer.width, spriteBuffer.height);
     entity.draw(spriteBufferContext);
